@@ -2,7 +2,7 @@
     <div id="keyBoard">
         <div class="row" v-for="(row, index) in rows">
             <div class="spacer" v-if="index === 1"></div>
-            <button v-for="key in row" :class="[key.length > 1 && 'big',key === '?' && 'color']">
+            <button v-for="key in row" :class="[key.length > 1 && 'big', key === '?' && 'color']" @click="$emit('key',key)">
                 <span v-if="key !== 'BackSpace'">{{ key }}</span>
                 <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-backspace" viewBox="0 0 16 16">
@@ -14,16 +14,18 @@
             </button>
             <div class="spacer" v-if="index === 1"></div>
         </div>
-        </div>
-    
+    </div>
+
 </template>
 
 <script lang="ts" setup>
+defineEmits<{
+  (e: 'key', key: string): void
+}>()
 const rows = [
     [...'qwertyuiop'.split('')],
-    [...'asdfghjkl'.split(''),'?'],
-    ['Enter',...'zxcvbnm'.split(''), 'BackSpace']
-]
+    [...'asdfghjkl'.split(''), '?'],
+    ['Enter', ...'zxcvbnm'.split(''), 'BackSpace']]
 </script>
 
 <style scoped>
@@ -34,42 +36,45 @@ const rows = [
 
 button {
     font-family: inherit;
-  font-weight: bold;
-  border: 0;
-  padding: 0;
-  margin: 0 6px 0 0;
-  height: 50px;
-  border-radius: 4px;
-  cursor: pointer;
-  user-select: none;
-  background-color: #d3d6da;
-  color: #1a1a1b;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
-  transition: all 0.2s 1.5s;
+    font-weight: bold;
+    border: 0;
+    padding: 0;
+    margin: 0 6px 0 0;
+    height: 50px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #d3d6da;
+    color: #1a1a1b;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
+    /* transition: all 0.2s 1.5s; */
 }
 
 .spacer {
     flex: .5;
 }
+
 button:last-of-type {
-  margin: 0;
+    margin: 0;
 }
 
 .row {
     display: flex;
     width: 100%;
     margin: 0 auto 8px;
-     touch-action: manipulation;
+    touch-action: manipulation;
 }
-button.big{
+
+button.big {
     flex: 1.5;
 }
-button.color{
+
+button.color {
     background-color: #ffc107;
 }
 </style>
