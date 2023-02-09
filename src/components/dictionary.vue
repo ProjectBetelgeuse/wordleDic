@@ -66,7 +66,7 @@ const searchDictionary = () => {
 }
 
 .result {
-  max-height: 400px;
+  max-height: 50vh;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -84,8 +84,8 @@ const searchDictionary = () => {
 
 .gameRow {
   display: flex;
-  height: 80px;
-  width: 80px;
+  height: 4rem;
+  width: 4rem;
   border-style: solid;
   border-color: gray;
   justify-content: center;
